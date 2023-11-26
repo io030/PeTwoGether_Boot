@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="member">
+
+   <select id="auth" parameterType="com.test.petwogether.model.member.MemberDTO" resultType="com.test.petwogether.model.member.MemberDTO">
+      select * from tblMember where mid=#{mid} and mpw=#{mpw}
+   </select>
+
+	<!-- 지현START ====== -->
+	<select id="adrlist" parameterType="java.util.HashMap" resultType="com.test.petwogether.model.member.AdoptReviewDTO">
+		select arseq, m.mname as arname, artitle, arcontent, arregdate, arview 
+			from (select rownum as rnum, ar.* from tblAdoptReview ar order by arseq desc) ar left join tblMember m on ar.mseq = m.mseq
+			 where rnum between #{begin} and #{end}
+				order by arseq desc
+	</select>
+	
+	<select id="getadrdetail" parameterType="String" resultType="com.test.petwogether.model.member.AdoptReviewDTO">
+		select arseq, m.mseq as mseq, m.mname as arname, artitle, arcontent, arregdate, arview, arfile 
+			from tblAdoptReview ar left join tblMember m on ar.mseq = m.mseq 
+				where arseq = #{arseq}
+	</select>
+
+	<select id="getmaxarseq" resultType="Integer">
+		select max(arseq) from tblAdoptReview
+	</select>
+	
+	<insert id="adradd" parameterType="com.test.petwogether.model.member.AdoptReviewDTO">
+		insert into tblAdoptReview (arseq, mseq, artitle, arcontent, arregdate, arview, arfile) 
+			values (${arseq}, ${mseq}, #{artitle}, #{arcontent}, default, default, #{arfile})		
+	</insert>
+	
+	<select id="editadr" parameterType="String" resultType="com.test.petwogether.model.member.AdoptReviewDTO">
+		select * from tblAdoptReview where arseq = ${arseq}
+	</select>
+	
+	<update id="updateadr" parameterType="com.test.petwogether.model.member.AdoptReviewDTO">
+		update tblAdoptReview set artitle=#{artitle}, arcontent=#{arcontent}, arfile=#{arfile} where arseq=${arseq}
+	</update>
+	
+	<delete id="deladr" parameterType="String">
+		delete from tblAdoptReview where arseq = ${arseq}
+	</delete>
+	
+	<update id="updatearview" parameterType="String">
+		update tblAdoptReview set arview = arview+1 where arseq =${arseq}
+	</update>
+	
+	<update id="reducearview" parameterType="String">
+		update tblAdoptReview set arview = arview-1 where arseq =${arseq}
+	</update>
+
+	<select id="adrsearch" parameterType="String" resultType="com.test.petwogether.model.member.AdoptReviewDTO">
+		select arseq, m.mname as arname, artitle, arcontent, arregdate, arview, arfile from tblAdoptReview ar 
+			left join tblMember m on ar.mseq = m.mseq where artitle like '%'||#{word}||'%'
+				order by arseq desc
+	</select>
+	
+	<select id="gettotalareview" resultType="Integer">
+		select count(*) from tblAdoptReview
+	</select>
+	
+	<!-- 지현END ====== -->
+
+<!-- 동균 START  -->
+   
+   <select id="getTotalQuestion" resultType="Integer">
+      select count(*) from tblQuestion
+   </select>
+   
+   <select id="getQList" parameterType="java.util.HashMap" resultType="com.test.petwogether.model.member.QuestionDTO">
+      select qseq, m.mid as qid, qtitle, qfile, qregdate 
+         from (select rownum as rnum, q.* from tblQuestion q order by qseq desc) q left join tblMember m on q.mseq = m.mseq
+          where rnum between #{begin} and #{end}
+            order by qseq desc
+   </select>
+   
+   <select id="qnaSearch" parameterType="String" resultType="com.test.petwogether.model.member.QuestionDTO">
+      select qseq, m.mid as qid, qtitle, qcontent, qregdate from tblQuestion q 
+         left join tblMember m on q.mseq = m.mseq where qtitle like '%'||#{word}||'%' or qcontent like '%'||#{word}||'%'
+            order by qseq desc
+   </select>
+   
+   <select id="getQuestion" parameterType="String" resultType="com.test.petwogether.model.member.QuestionDTO">
+      select * from tblQuestion where qseq = #{qseq}
+   </select>
+   
+   <select id="getAnswer" parameterType="String" resultType="com.test.petwogether.model.admin.AnswerDTO">
+      
+   select anseq,(select adname from tblAdmin ad where ad.adseq=a.adseq) as adname,qseq,ancontent,anregdate from tblAnswer a where qseq = #{qseq}
+
+   </select>
+   
+   <insert id="questionAdd" parameterType="com.test.petwogether.model.member.QuestionDTO">
+      insert into tblQuestion values (seqQuestion.nextval,#{mseq},#{qtitle},#{qcontent},#{qfile},default)
+   </insert>
+   
+   <insert id="answerAdd" parameterType="com.test.petwogether.model.member.QuestionDTO">
+      insert into tblAnswer values (seqAnswer.nextval,#{adseq},#{qseq},#{ancontent},default)
+   </insert>
+   
+   <delete id="answerDel" parameterType="String">
+      delete from tblAnswer where qseq = #{qseq}
+   </delete>
+   
+   <delete id="qnaDel" parameterType="String">
+      delete from tblQuestion where qseq = #{qseq}
+   </delete>
+   
+   <update id="questionEdit" parameterType="com.test.petwogether.model.member.QuestionDTO">
+      update tblQuestion set qtitle= #{qtitle} , qcontent=#{qcontent},qfile=#{qfile} where qseq = #{qseq}
+   </update>
+   
+   <!-- 동균 END  -->
+   
+   <!-- 설화 시작  -->
+   
+   <!-- 설 -->
+   <select id="adoptlist" parameterType="java.util.HashMap" resultType="com.test.petwogether.model.AdoptListDTO">
+      select * from (select rownum as rnum, l.* from tblAdoptList l order by aseq desc) where rnum between #{begin} and #{end} order by aseq desc
+   </select>
+   
+   <!-- 설 -->
+   <select id="adoptlistdog" parameterType="java.util.HashMap" resultType="com.test.petwogether.model.AdoptListDTO">
+      select * from (select rownum as rnum, l.* from tblAdoptList l where atype = '강아지' order by aseq desc) where rnum between #{begin} and #{end} order by aseq desc
+   </select>
+   
+   <!-- 설 -->
+   <select id="adoptlistcat" parameterType="java.util.HashMap" resultType="com.test.petwogether.model.AdoptListDTO">
+      select * from (select rownum as rnum, l.* from tblAdoptList l where atype = '고양이' order by aseq desc) where rnum between #{begin} and #{end} order by aseq desc
+   </select>
+   
+   <!-- 설 -->
+   <select id="adoptlistother" parameterType="java.util.HashMap" resultType="com.test.petwogether.model.AdoptListDTO">
+      select * from (select rownum as rnum, l.* from tblAdoptList l where atype = '기타' order by aseq desc) where rnum between #{begin} and #{end} order by aseq desc
+   </select>
+
+   <!-- 설 -->
+   <select id="adoptlistview" parameterType="String" resultType="com.test.petwogether.model.AdoptListDTO">
+      select * from tblAdoptlist where aseq = #{aseq}
+   </select>
+
+   <!-- 설 -->
+   <select id="gettotallist" resultType="Integer">
+      select count(*) from tblAdoptList
+   </select>
+
+   <!-- 설 -->
+   <select id="gettotallist2" parameterType="String" resultType="Integer">
+      select count(*) from tblAdoptList where atype = #{type}
+   </select>
+   
+   <!-- 설화 끝  -->
+   
+      <!-- 유찬 시작 -->
+   
+   <select id="straylist" resultType="com.test.petwogether.model.member.StrayDTO">
+      select * from tblStray order by sseq desc
+   </select>
+   
+   <insert id="addstray" parameterType="com.test.petwogether.model.member.StrayDTO">
+      insert into tblStray (sseq, mseq, stitle, scontent, slocal, sfile, stel, sstate) values (seqStray.nextVal, #{mseq}, #{stitle}, #{scontent}, #{slocal}, #{sfile}, #{stel}, default)
+   </insert>
+   
+   <delete id="delstray" parameterType="String">
+      delete from tblStray where sseq = #{sseq}
+   </delete>
+   
+   <!-- 유찬 끝 -->
+   
+   <!-- 영우 시작  -->
+   
+         
+         
+   <select id="gettotalhinfo" resultType="Integer">
+      select count(*) from tblHealth
+   </select>
+   
+   <select id="hilist" parameterType="java.util.HashMap" resultType="com.test.petwogether.model.admin.HealthDTO">
+      select hseq, a.adname as hname, htitle, hcontent, hregdate, hview 
+         from (select rownum as rnum, h.* from tblHealth h order by hseq desc) h left join tblAdmin a on h.adseq = a.adseq
+          where rnum between #{begin} and #{end}
+            order by hseq desc
+   </select>
+   
+   <select id="hisearch" parameterType="String" resultType="com.test.petwogether.model.admin.HealthDTO">
+      select hseq, a.adname as hname, htitle, hcontent, hregdate, hview, hfile from tblHealth h 
+         left join tblAdmin a on h.adseq = a.adseq where htitle like '%'||#{word}||'%'
+            order by hseq desc
+   </select>
+      
+   <select id="gethidetail" parameterType="String" resultType="com.test.petwogether.model.admin.HealthDTO">
+      select hseq, a.adseq as adseq, a.adname as hname, htitle, hcontent, hregdate, hview, hfile 
+         from tblHealth h left join tblAdmin a on h.adseq = a.adseq
+            where hseq = #{hseq}
+   </select>
+      
+   <update id="updatehview" parameterType="String">
+      update tblHealth set hview = hview+1 where hseq =${hseq}
+   </update>
+   
+   
+   
+   
+   
+   
+   
+   <!-- 영우 끝  -->
+
+
+</mapper>

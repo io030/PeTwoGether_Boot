@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="admin">
+
+   <select id="auth" parameterType="com.test.petwogether.model.admin.AdminDTO" resultType="com.test.petwogether.model.admin.AdminDTO">
+      select * from tblAdmin where adid=#{adid} and adpw=#{adpw}
+   </select>
+
+</mapper>

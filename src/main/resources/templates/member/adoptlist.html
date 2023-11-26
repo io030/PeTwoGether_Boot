@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/css/adoptreview.css">
+
+<th:block th:insert="~{inc/asset.html}"></th:block>
+<style>
+
+.ftco-section {
+    padding: 4em 0;
+}
+
+#btns {
+   width: 960px;
+   margin: 0 auto;
+   text-align: center;
+}
+
+a {
+  text-decoration-line: none;
+}
+
+#btns input[type=button] {
+   background-color: #FBA1A4;
+   color: white;
+   font-size: 1rem;
+   padding: 5px 20px;
+   width: 100px;
+   border: 0;
+   margin: 15px 5px;
+}
+
+#btns input[type=button]:hover {
+   background-color: #FFE8CB;
+   color: black;
+}
+
+#imglist {
+   width: 960px;
+   margin: 0 auto;
+}
+
+#imglist  img {
+   width: 300px;
+   height: 200px;
+   -webkit-transform: scale(1);
+   transform: scale(1);
+   -webkit-transition: 0.5s ease-in-out;
+   transition: 0.5s ease-in-out;
+   
+}
+
+#imglist  img:hover {
+   -webkit-transform: scale(1.2);
+   transform: scale(1.1);
+   overflow: hidden;
+}
+
+.a { 
+   width: 300px;
+   height: 200px;
+   display: inline-block;
+   margin: 10px 10px;
+   overflow: hidden;
+   position: relative;
+     text-align: center;
+}
+
+#ing {
+   position: absolute;
+     top: 10px;
+    right: 12px;
+    background-color: rgba(78, 78, 78, 0.7);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 30px;
+}
+
+#ing > img {
+   width: 20px;
+   height: 20px;
+   margin-right: 3px;
+}
+
+a {
+   text-decoration: none;
+   color: #555;
+}
+
+</style>
+
+</head>
+<body>
+
+   <th:block th:insert="~{inc/header.html}"></th:block>
+
+
+   <section class="hero-wrap hero-wrap-2"
+      style="background-image: url(/images/bg_2.jpg);"
+      data-stellar-background-ratio="0.5">
+      <div class="overlay"></div>
+      <div class="container">
+         <div class="row no-gutters slider-text align-items-end">
+            <div class="col-md-9 ftco-animate pb-5">
+               <h1 class="mb-0 bread">가족을 기다리는 아이들</h1>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   
+   <section id="np" class="ftco-section bg-light">
+      <div class="container">
+      
+      <div id="btns">
+         <a href="/member/adoptlist">
+         <input type="button" class="cbtn" value="전체" th:style="${type == null ? 'background-color: #FFE8CB;' : ''}">
+         </a>
+         <a href="/member/adoptlist?type=강아지">
+         <input type="button" class="cbtn" value="강아지" th:style="${type == '강아지' ? 'background-color: #FFE8CB;' : ''}">
+         </a>
+         <a href="/member/adoptlist?type=고양이">
+         <input type="button" class="cbtn" value="고양이" th:style="${type == '고양이' ? 'background-color: #FFE8CB;' : ''}">
+         </a>
+         <a href="/member/adoptlist?type=기타">
+         <input type="button" class="cbtn" value="기타" th:style="${type == '기타' ? 'background-color: #FFE8CB;' : ''}">
+         </a>
+      </div>
+      
+      <div id="imglist">
+         
+         <span class="a" th:each="alist: ${list}">
+         <a th:href="'/member/adoptlistview?aseq='+${alist.aseq}">
+         <img th:src="'/images/apet/'+${alist.afile}" th:id="${alist.aseq}">
+         <span id="ing" th:if="${alist.astate == '진행 중'}"><img src="/images/apet/ing.png">진행 중</span>
+         </a>
+         </span>
+      
+      </div>
+      
+      </div>
+      
+      <div id="pagebar" >
+         <th:block>[(${pagebar})]</th:block>
+      </div>  
+
+   </section>
+
+
+
+
+   <th:block th:insert="~{inc/footer.html}"></th:block>
+
+</body>
+
+</html>

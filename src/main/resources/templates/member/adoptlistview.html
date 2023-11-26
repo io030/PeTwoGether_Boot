@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/css/adoptreview.css">
+
+<th:block th:insert="~{inc/asset.html}"></th:block>
+<style>
+
+#box {
+   width: 750px;
+   margin: 0 auto;
+}
+
+#title {
+   height: 70px;
+}
+
+#title > img {
+   width: 60px;
+   height: 60px;
+   margin-bottom: 20px;
+   margin-right: 5px;
+}
+
+#name {
+   font-size: 3rem;
+}
+
+#imgbox > img {
+   width:750px;
+   height: 500px;
+   margin-bottom: 50px;
+   margin-bottom: 20px;
+}
+
+#desc td {
+   border: 3px solid #F4CB90;
+   text-align: center;
+   font-size: 2rem;
+}
+
+#desc td:nth-child(1) {
+   width: 300px;
+}
+
+#desc td:nth-child(2) {
+   width: 450px;
+}
+
+#desc td > img {
+   width: 40px;
+   margin-bottom: 5px;
+}
+
+#content {
+   margin-top: 30px;
+   font-size: 1.5rem;
+}
+
+#content > img {
+   width: 25px;
+   margin-left: 5px;
+}
+
+#back {
+   background-color: #FBA1A4;
+   color: white;
+   font-size: 1.6rem;
+   padding: 10px 20px;
+   border: 0;
+   border-radius: 10px;
+   margin: 0 auto;
+   margin-top: 80px;
+   display: block;
+}
+
+#back:hover {
+   background-color: #FFE8CB;
+   color: black;
+}
+
+</style>
+
+</head>
+<body>
+
+   <th:block th:insert="~{inc/header.html}"></th:block>
+
+
+   <section class="hero-wrap hero-wrap-2"
+      style="background-image: url(/images/bg_2.jpg);"
+      data-stellar-background-ratio="0.5">
+      <div class="overlay"></div>
+      <div class="container">
+         <div class="row no-gutters slider-text align-items-end">
+            <div class="col-md-9 ftco-animate pb-5">
+               <h1 class="mb-0 bread">가족을 기다리는 아이들</h1>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   
+   <section class="ftco-section bg-light">
+      <div class="container">
+   
+      <div id="box">
+      
+      <div id="title">
+         <img src="/images/apet/f.png" th:if="${dto.agender == 'f'}">
+         <img src="/images/apet/m.png" th:if="${dto.agender == 'm'}">
+         <span id="name" th:text="${dto.aname}"></span>
+      </div>
+      
+      <div id="imgbox">
+      <img th:src="'/images/apet/'+${dto.afile}">
+      
+      </div> 
+      
+      <table id="desc">
+         <tr>
+            <td>품종</td>
+            <td th:text="${dto.abreed}"></td>
+         </tr>
+         <tr>
+            <td>성별</td>
+            <td th:text="${dto.agender == 'm' ? '남아' : '여아'}"></td>
+         </tr>
+         <tr>
+            <td>나이</td>
+            <td th:text="${dto.aage} + ' 추정'" ></td>
+         </tr>
+         <tr>
+            <td>체중</td>
+            <td th:text="${dto.aweight} + ' KG'"></td>
+         </tr>
+         <tr>
+            <td>입소날짜</td>
+            <td th:text="${#strings.substring(dto.adate, 0, 10)}"></td>
+         </tr>
+         <tr>
+            <td>상태</td>
+            <td>
+            <span th:text="${dto.astate}"></span>
+            <img src="/images/apet/ing.png" th:if="${dto.astate == '진행 중'}">
+            </td>
+            
+         </tr>
+      </table>
+      
+      <div id="content">
+         <img src="/images/apet/foot.png">
+         <span th:text="${dto.acontent}"></span>
+      </div>
+      
+      <input type="button" id="back" value="돌아가기" onclick="history.back()">
+      
+      </div>
+      </div>
+   </section>
+
+
+
+
+   <th:block th:insert="~{inc/footer.html}"></th:block>
+
+</body>
+
+
+</html>

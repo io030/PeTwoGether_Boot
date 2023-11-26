@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet"	href="/css/adoptreview.css">
+
+<th:block th:insert="~{inc/asset.html}"></th:block>
+
+
+</head>
+<body>
+
+	<th:block th:insert="~{inc/header.html}"></th:block>
+
+
+	<section class="hero-wrap hero-wrap-2"
+		style="background-image: url(/images/bg_2.jpg);"
+		data-stellar-background-ratio="0.5">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row no-gutters slider-text align-items-end">
+				<div class="col-md-9 ftco-animate pb-5">
+					<h1 class="mb-0 bread">
+						입양 후기 게시판
+					</h1>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- 후기 게시판 -->
+	<section class="ftco-section bg-light">
+	<div class="formContainer" style="margin: 0 auto; width: 1000px; border-radius: 10px; border: 1px solid #F8A1A4; padding: 20px;">
+	
+	<h1 align="center">입양후기 수정하기</h1>
+	
+	<form method="POST" action="/member/adoptrevieweditok" enctype="multipart/form-data">
+		<div class="mb-3">
+			<label for="exampleFormControlInput1" class="form-label" style="color: #F8A1A4;">제목</label> 
+			<input type="text" class="form-control" id="artitle" name="artitle" th:value="${ardto.artitle}" required style="height: 1000px;">
+		</div>
+		<div class="mb-3">
+			<label for="exampleFormControlInput1" class="form-label" style="color: #F8A1A4;">내용</label>
+			<textarea class="form-control" rows="3" style="resize: none; height: 800px !important;" name="arcontent" id="arcontent" required placeholder="내용을 입력하세요">[[${ardto.arcontent}]]</textarea>
+		</div>
+
+
+
+ 		<div class="mb-3">
+			<label for="formFileSm" class="form-label" style="color: #F8A1A4;">사진 추가</label> 
+			<input class="form-control form-control-sm" style="height: 30px !important;" id="arfile" name="arfile" type="file">
+		</div>
+
+		<input type="hidden" name="arseq" th:value="${ardto.arseq}">
+		<input type="hidden" name="arview" th:value="${ardto.arview}">
+		
+		<div class="allbox" style="width: 100%;">
+			<button type="button" class="addbtn" th:onclick="|location.href='/member/adoptreviewdetail?arseq=${arseqs}'|">돌아가기</button>
+			<button type="submit" class="addbtn" >작성하기</button>
+		</div>
+	</form>
+	
+	</div>
+
+	</section>
+	
+	
+	
+
+	<th:block th:insert="~{inc/footer.html}"></th:block>
+	
+	<script>
+
+	</script>	
+</body>
+</html>

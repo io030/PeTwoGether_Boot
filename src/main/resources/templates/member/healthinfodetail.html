@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/css/healthinfo.css">
+
+<th:block th:insert="~{inc/asset.html}"></th:block>
+<style>
+
+</style>
+
+</head>
+<body>
+
+   <th:block th:insert="~{inc/header.html}"></th:block>
+
+
+   <section class="hero-wrap hero-wrap-2"
+      style="background-image: url(/images/bg_2.jpg);"
+      data-stellar-background-ratio="0.5">
+      <div class="overlay"></div>
+      <div class="container">
+         <div class="row no-gutters slider-text align-items-end">
+            <div class="col-md-9 ftco-animate pb-5">
+               <h1 class="mb-0 bread">의료 게시판</h1>
+            </div>
+         </div>
+      </div>
+   </section>
+
+    <section class="ftco-section ftco-degree-bg">
+      <div class="container">
+        <div class="" style="width: 89%; margin: 10px auto;">
+          <div class="col-lg-8 ftco-animate" style="width: 89%; margin: 10px auto;">
+             <p>
+            
+             <!--  <img th:src="@{/files/} + ${hdto.hfile}"  alt="" class="img-fluid"> -->
+              <img th:src="@{/images/health/} + ${hdto.hfile}"  alt="" class="img-fluid">
+
+            </p>
+            <h2 class="mb-3" align="center" style="padding: 10px;">[[${hdto.htitle}]]</h2>
+            <p class="detailtxt">[[${hdto.hcontent}]]</p>
+            
+            
+            <div class="about-author d-flex p-4 bg-light" style=" margin-top: 60px; padding: 30px !important;">
+              
+              <div class="desc">
+              
+                <h3><small style="color: #555;">작성자</small>  [[${hdto.hname}]]</h3>
+                <h6 style="color: #C4C4C4; font-size: 1rem;">[[${hdto.hregdate}]]</h6>
+                <h6 style="color: #C4C4C4; font-size: 1rem;"><small>조회수&nbsp;&nbsp;</small>[[${hview}]]</h6>
+                
+              </div>
+            </div> 
+          </div>
+
+        </div>
+      </div>
+
+      
+         <div class="leftbox" style="width: 800px; margin: 30px auto; margin-top: 80px; text-align: center; display:flex; justify-content: space-between;">
+      <button type="button" class="addbtn" onclick="location.href='/member/healthinfo';">돌아가기</button>
+      </div>
+      
+    </section> <!-- .section -->
+
+
+
+
+   <th:block th:insert="~{inc/footer.html}"></th:block>
+
+   <script th:inline="javascript">
+   
+   
+   </script>
+
+   
+</body>
+
+
+
+</html>
+
+
+
+

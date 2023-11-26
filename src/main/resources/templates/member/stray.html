@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/css/adoptreview.css">
+
+<th:block th:insert="~{inc/asset.html}"></th:block>
+</head>
+<style>
+
+.delbtn {
+	width: 30px;
+	height: 30px;
+	background-color: #F8A1A4;
+	font-size: 1.2rem;
+	color: white;
+	border: 0px;
+	border-radius: 10px;
+	float: right; 
+}
+
+</style>
+<body>
+	
+	<th:block th:insert="~{inc/header.html}"></th:block>
+	
+	
+	<section class="hero-wrap hero-wrap-2"
+		style="background-image: url(/images/bg_2.jpg);"
+		data-stellar-background-ratio="0.5">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row no-gutters slider-text align-items-end">
+				<div class="col-md-9 ftco-animate pb-5">
+					<h1 class="mb-0 bread">아이들을 찾습니다!</h1>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<!-- 유기동물찾기 -->
+	
+	<section class="ftco-section bg-light">
+	
+			<div class="container" style="margin-bottom: 20px; width: 1200px;">
+						
+			<div style="margin-bottom: 10px;">
+         		<input type="button" value="등록하기" style="width: 150px; height: 50px; border: 0; background-color: #F8A1A4; border-radius: 5px; color: white;"
+         				 onclick="location.href='/member/addstray';">
+			</div>
+			
+				<div class="row" >
+
+					<div class="col-md-6 col-lg-3 ftco-animate fadeInUp ftco-animated" style="background-color: #eeeeee;" th:each="slist : ${slist}">
+						<div class="staff">
+							<div class="img-wrap d-flex align-items-stretch">
+								<div class="img align-self-stretch work mb-4 img d-flex align-items-end" th:style="'background-image:url(/images/apet/'+ ${slist.sfile} +');'"
+									style="cursor: pointer;">
+									<a th:href="@{/images/apet/} + ${slist.sfile}" class="icon image-popup d-flex justify-content-center align-items-center">
+										<i class="fa-solid fa-magnifying-glass-plus"></i>
+									</a>
+
+								</div>
+								
+<!-- 							<div class="img align-self-stretch apetWrap" style="cursor: pointer;">
+									<div class="apet"></div>
+									<img th:src="@{/images/apet/} + ${slist.sfile}"  alt="" class="img-fluid apetImg" style="height:300px;" onclick="bigImg();">
+								</div>		 -->
+								
+							</div>
+							<div class="text pt-3 px-3 pb-4 text-center" style="height: 500px;">
+								<h3 style="font-size: 1.6rem; margin: 10px;" th:text="${slist.stitle}"></h3>
+								<span class="position mb-2" th:text="${slist.slocal}"></span>
+								<div class="faded" style="color: #838383;">
+									<p th:text="${slist.scontent}"></p>									
+																	
+	             				 </div>
+	             				 <div th:text="${slist.sstate}"></div>
+<!-- 	             				 <div th:text="${slist.sseq}"></div> -->
+	             				 
+							</div>
+								
+								 <form method="get" action="/member/straydelok">
+								 
+								 <div th:if="${session.sseq == slist.mseq}">
+								 <input type="submit" class="delbtn" onclick="delstray();" value="X">
+								 <input type="hidden" name="sseq" th:value="${slist.sseq}" />
+	             				 </div>
+         				 
+								 </form>
+						</div>
+						
+					</div>
+ 	
+					
+				</div>
+			</div>
+
+		</section>
+
+	<th:block th:insert="~{inc/footer.html}"></th:block>
+
+	<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+	<script th:inline="javascript">
+	
+		function delstray() {
+			
+
+			if(confirm("정말 삭제하시겠습니까?")){
+
+				location.href ='/member/straydelok';
+				
+			} else{
+				history.back();
+			}
+			
+			
+			
+		};
+	
+	</script>
+
+	
+	
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/css/qnalist.css">
+
+<th:block th:insert="~{inc/asset.html}"></th:block>
+<style>
+</style>
+
+</head>
+<body>
+
+	<th:block th:insert="~{inc/header.html}"></th:block>
+
+
+	<section class="hero-wrap hero-wrap-2"
+		style="background-image: url(/images/bg_2.jpg);"
+		data-stellar-background-ratio="0.5">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row no-gutters slider-text align-items-end">
+				<div class="col-md-9 ftco-animate pb-5">
+					<h1 class="mb-0 bread">QnA 게시판</h1>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="ftco-section ftco-degree-bg">
+		<div class="container" >
+			<div class="row">
+				<div class="col-lg-8 ftco-animate" style="margin: 0 auto;">
+					<p>
+						<img th:src="@{/images/} + ${qdto.qfile}"  alt="질문사진" class="img-fluid">
+					</p>
+					<h2 class="mb-3">[[${qdto.qtitle}]]</h2>
+					<p>[[${qdto.qcontent}]]</p>
+
+					
+					<div class="about-author d-flex p-4 bg-light" th:if="${adto} != null">
+						<div class="desc">
+							<h3>[[${adto.adname}]]</h3>
+							<p>[[${adto.ancontent}]]</p>
+						</div>
+					</div>
+					
+					<div class="leftbox"
+							style="width: 800px; margin: 30px auto; margin-top: 80px; text-align: center; display: flex; justify-content: space-between;">
+							<div th:if="${session.sseq} == ${qdto.mseq} and ${session.lv} == '1'">
+								<button type="button" class="addbtn"
+									th:onclick="|location.href='/member/questionedit?qseq=${qseqI}'|">수정하기</button>
+								<button type="button" class="addbtn" onclick="del();">삭제하기</button>
+							</div>
+							<button type="button" class="addbtn"
+								onclick="location.href='/member/qnalist';">돌아가기</button>
+						</div>
+
+
+					<div class="pt-5 mt-5" th:if="${session.lv} == '3' and ${adto} == null">
+
+						<div class="comment-form-wrap pt-5">
+							<h3 class="mb-5">답변 작성</h3>
+							<form action="/member/answeraddok" method="POST" class="p-5 bg-light">
+								<div class="form-group">
+									<label for="name">답변</label> <input type="text"
+										class="form-control" id="ancontent" name="ancontent">
+								</div>
+								
+								<div class="form-group">
+									<input type="submit" value="답변 달기"
+										class="btn py-3 px-4 btn-primary">
+								</div>
+								<input type="hidden" name="qseq" th:value="${qseqI}">
+								<input type="hidden" name="adseq" th:value="${session.sseq}">
+							</form>
+						</div>
+						
+					</div>
+
+				</div>
+				<!-- .col-md-8 -->
+
+			</div>
+		</div>
+
+
+	</section>
+	<!-- .section -->
+
+
+
+
+	<th:block th:insert="~{inc/footer.html}"></th:block>
+
+	<script th:inline="javascript">
+	
+		function del() {
+			
+			let qseq = [[${qseqI}]];
+
+			if(confirm("정말 삭제하시겠습니까?")){
+
+				location.href ='/member/qnadelok?qseq=' + qseq;
+				
+			} else{
+				history.back();
+			}
+			
+			
+			
+		};
+	
+	</script>
+
+
+</body>
+
+
+
+</html>
+
+
+
+
+

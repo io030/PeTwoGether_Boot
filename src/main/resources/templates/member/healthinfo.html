@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/css/healthinfo.css">
+
+<th:block th:insert="~{inc/asset.html}"></th:block>
+<style>
+
+a {
+   text-decoration: none;
+   color: #555;
+}
+
+</style>
+
+</head>
+<body>
+
+   <th:block th:insert="~{inc/header.html}"></th:block>
+
+
+   <section class="hero-wrap hero-wrap-2"
+      style="background-image: url(/images/bg_2.jpg);"
+      data-stellar-background-ratio="0.5">
+      <div class="overlay"></div>
+      <div class="container">
+         <div class="row no-gutters slider-text align-items-end">
+            <div class="col-md-9 ftco-animate pb-5">
+               <h1 class="mb-0 bread">의료 게시판</h1>
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <!-- 후기 게시판 -->
+   <section class="ftco-section bg-light">
+      <div class="container"></div>
+      <div class="allbox">
+         <div class="">
+            <input type="text" id="searchbox" placeholder="검색어를 입력해주세요.">
+            <button type="button" class="searchbtn" id="searchbtn">
+               <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+         </div>
+      </div>
+
+      <table class="hlist" id="hilist">
+         <thead>
+            <tr>
+               <th>글번호</th>
+               <th>제목</th>
+               <th>작성자</th>
+               <th>작성 날짜</th>
+               <th>조회수</th>
+            </tr>
+         </thead>
+
+         <tbody>
+            <tr th:each="hdto : ${hilist}" th:object="${hdto}">
+               <td>
+                  <input type="text" class="hseq" name="hseq" th:value="*{hseq}" readonly>
+               </td>
+               <td>
+                  <a th:href="@{/member/healthinfodetail(hseq=*{hseq})}"><input type="text" class="htitle" name="htitle" th:value="*{htitle}"   readonly></a>
+               </td>
+               <td>
+                  <input type="text" class="hname" name="hname" th:value="*{hname}" readonly>
+               </td>
+               <td>
+                  <input type="text" class="hregdate" name="hregdate" th:value="*{hregdate}" readonly>
+               </td>
+               <td>
+                  <input type="text" class="hview" name="hview" th:value="*{hview}" readonly>
+               </td>
+            </tr>
+         </tbody>
+
+
+
+      </table>
+      
+      <div id="pagebar" >
+         <th:block>[(${pagebar})]</th:block>
+      </div>
+
+   </section>
+
+
+
+
+   <th:block th:insert="~{inc/footer.html}"></th:block>
+
+</body>
+
+<script th:inline="javascript">
+      
+
+         $('#searchbtn').click(() => {
+             
+             $.ajax({
+                
+                type: 'GET',
+         
+                url: '/member/healthinfosearch',
+                
+                data: 'word=' + $('#searchbox').val(),
+                
+                dataType: 'JSON',
+                
+                success: function(result) {
+         
+                   $('#hilist tbody').html('');
+                                     
+                    
+                    result.forEach((item, index) => {
+                       
+
+                        let temp = '';
+         
+                        temp += '<tr>';
+                        temp += '<td><input type="text" class="hseq" name="hseq" value=' + item.hseq + ' readonly></td>';
+                        temp += '<td><a href="/member/healthinfodetail?hseq='  + item.hseq +'"><input type="text" class="htitle" name="htitle" value="'  + item.htitle + '" readonly></a></td>';
+                        temp += '<td><input type="text" class="hname" name="hname" value="' + item.hname + '" readonly></td>';
+                        temp += '<td><input type="text" class="hregdate" name="hregdate" value="' + item.hregdate + '" readonly></td>';
+                        temp += '<td><input type="text" class="hview" name="hview" value="' + item.hview + '" readonly></td>';
+                        temp += '</tr>';
+             
+                        $('#hilist tbody').append(temp);
+         
+                    }); //forEach
+         
+                }, //success
+          
+                error: function(a,b,c) {
+                   console.log(a,b,c);
+                }
+             })
+             
+           });
+             
+    </script>
+
+
+</html>

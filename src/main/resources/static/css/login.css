@@ -1,0 +1,73 @@
+#loginbox {
+	border: 3px solid #c0c0c0; 
+	border-radius: 50px; 
+	width: 800px; 
+	height: 480px; 
+	background-color: white; 
+	margin: 0 auto; 
+	font-size: 2rem;
+}
+
+#loginbox > h1 {
+	font-size: 3rem;
+	margin-top: 30px; 
+	color: black;
+}
+
+#user {
+	margin: 20px 0;
+}
+
+#user > label {
+	font-size: 1.5rem;
+	margin: 20px 30px;
+	color: #7F7F7F; 
+}
+
+#user > label:hover {
+	color: black;
+}
+
+.rd {
+	width: 20px;
+	height: 20px;
+}
+
+.rd:checked + span {
+	color: black;
+}
+
+div > span {
+	color: #7F7F7F; 
+	display: inline-block; 
+	width: 160px; 
+	margin-right: 20px;
+}
+
+#user + span {
+	margin-bottom: 30px; 
+}
+
+div > input {
+	outline-style: none; 
+	padding-left: 10px;
+}
+
+#loginbtn {
+	margin: 50px 0;
+}
+
+.btnlo {
+	background-color: #F8A1A4; 
+	color: white; 
+	margin-right: 20px; 
+	font-size: 1.6rem; 
+	padding: 10px 20px; 
+	border: 0; 
+	border-radius: 10px;
+}
+
+.btnlo:hover {
+	background-color: #FFE8CB;
+	color: black;
+}

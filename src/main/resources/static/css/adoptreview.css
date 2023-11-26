@@ -1,0 +1,184 @@
+.rightbox {
+	width: 70%;
+	text-align: right;
+	margin: 10px auto;
+}
+
+.leftbox {
+	width: 70%;
+	margin: 10px auto;
+}
+
+.allbox{
+	display: flex;
+	width: 70%;
+	justify-content: space-between;
+	margin:10px auto;
+}
+
+
+#pagebar {
+	margin: 20px;
+	text-align: center;
+}
+
+#searchbox {
+	width: 250px;
+	height: 45px;
+	background-color: white;
+	border: 3px solid gray;
+	border-radius: 10px;
+	margin: 10px auto;
+	outline: none;
+}
+
+.searchbtn {
+	width: 40px;
+	height: 40px;
+	background-color: #F8A1A4;
+	font-size: 1.2rem;
+	color: white;
+	border: 0px;
+	border-radius: 10px;
+}
+
+.addbtn {
+	widht: 170px;
+	height: 45px;
+	background-color: #F8A1A4;
+	font-size: 1.2rem;
+	color: white;
+	border: 0px;
+	border-radius: 10px;
+}
+
+.adlist {
+	border: 1px solid gray;
+	width: 70%;
+	margin: 10px auto;
+	margin-bottom: 30px;
+	background-color: #FFF4E7;
+}
+
+.adlist tr th {
+	border: 1px solid gray;
+	text-align: center;
+	background-color: #FFE8CB;
+	font-size: 1.3rem;
+	padding: 10px;
+	color: #555;
+}
+
+.adlist input {
+	text-align: center;
+	margin: 0;
+	outline: none;
+	border: 0px;
+	background-color: #FFF4E7;
+	height: 35px;
+}
+
+.arseq {
+	width: 100px !important;
+}
+
+.artitle {
+	width: 430px;
+	cursor: pointer;
+}
+
+.artitle:hover {
+	color: #F8A1A4;
+}
+
+.arname {
+	width: 150px;
+}
+
+.arregdate {
+	width: 150px;
+}
+
+.arview {
+	width: 70px;
+	text-align: right;
+}
+
+.adlist tr td {
+	border: 1px solid gray;
+	text-align: center;
+	padding: 10px;
+	font-size: 1.2rem;
+}
+
+a {
+	text-decoration: none;
+
+}
+
+.detailtxt {
+	color: #555;
+	width: 80%;
+	line-height: 2rem;
+	margin: 10px auto;
+}
+
+.adradd {
+	width: 60%;
+	margin: 30px auto;
+	background-color: white;
+	text-align: center;
+}
+
+.adradd tr th {
+	border: 5px solid #F8F9FA;
+	width: 30%;
+	color: #555;
+	font-size: 1.5rem;
+}
+
+.adradd tr td {
+	border: 5px solid #F8F9FA;
+	pardding: 20px;
+}
+
+#artitle {
+	width: 90%;
+	outline: none;
+	height: 45px;
+	margin: 20px;
+	border-radius: 15px;
+	border: 2px solid #CDCDCD;
+	padding: 15px;
+}
+
+#arcontent {
+	width: 90%;
+	outline: none;
+	margin: 20px;
+	border-radius: 15px;
+	border: 2px solid #CDCDCD;
+	padding: 15px;
+	min-height: 300px;
+	resize: none;
+}
+
+#arfile {
+	margin: 20px auto;
+	color: #555;
+}
+
+#attachZone {
+	border: 3px solid #CCC;
+	border-radius: 15px;
+	width: 90%;
+	margin: 10px auto;
+	margin-top: 30px;
+	height: 100px;
+}
+
+#attachZone div {
+	margin: 5px 10px;
+	display: flex;
+	justify-content: space-between;
+}

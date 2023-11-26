@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/css/adoptreview.css">
+
+<th:block th:insert="~{inc/asset.html}"></th:block>
+</head>
+<style>
+
+</style>
+<body>
+	
+	<th:block th:insert="~{inc/header.html}"></th:block>
+	
+	<section class="hero-wrap hero-wrap-2" style="background-image: url(/images/bg_2.jpg);" data-stellar-background-ratio="0.5">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-end">
+          <div class="col-md-9 ftco-animate pb-5">             
+            <h1 class="mb-0 bread">유기동물 찾기 등록하기</h1>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ftco-section bg-light">
+         <div class="container">
+         	
+         	<div style="border-radius: 50px; height: 700px; width: 725px; margin: 0 auto; background-color: #F6F3FF">
+         	
+         	<div style="text-align: center; font-size: 2.5rem; padding: 10px; padding-top: 35px;">유기동물 등록</div>
+         	
+         	
+         	
+         	<form method="POST" action="/member/addstrayok" enctype="multipart/form-data">
+         	<table>
+         		<tr>
+         			<th style="text-align: center; font-size: 1.5rem; padding: 10px;">제목</th>
+         			<td><input type="text" required name="stitle" style="border:0 solid black; width: 600px; height: 35px; border-radius: 10px;"></td>
+         		</tr>
+         		<tr>
+         			<th style="text-align: center; font-size: 1.5rem; padding: 10px;">내용</th>
+         			<td><textarea required name="scontent" style="border:0 solid black; width: 600px; height: 200px; border-radius: 10px;"></textarea></td>
+         		</tr>
+         		<tr>
+         			<th style="text-align: center; font-size: 1.5rem; padding: 10px;">거주지</th>
+         			<td><input type="text" required name="slocal" style="border:0 solid black; width: 600px; height: 35px; border-radius: 10px;"></td>
+         		</tr>
+         		<tr>
+         			<th style="text-align: center; font-size: 1.5rem; padding: 10px;">사진</th>
+         			<td>
+						<input type="file" name="sfile">
+					</td>
+         		</tr>
+         		<tr>
+         			<th style="text-align: center; font-size: 1.5rem; padding: 10px;">연락처</th>
+         			<td><input type="text" required name="stel" style="border:0 solid black; width: 600px; height: 35px; border-radius: 10px;"></td>
+         		</tr>
+         		
+         	</table>
+         	
+           	
+         	      		
+         	      	
+         	<div style="width: 500px; margin: 0 auto; padding: 50px; display: flex; justify-content: space-between;">
+         		<input type="submit" value="등록하기" style="width: 150px; height: 50px; border: 0; background-color: #F8A1A4; border-radius: 5px; color: white;">
+         		<input type="button" value="돌아가기" style="width: 150px; height: 50px; border: 0; background-color: #F8A1A4; border-radius: 5px; color: white;" onclick="location.href='/member/stray';">
+         	</div>
+         	
+         	<input type="hidden" name="mseq" value="${sseq}">
+         	   
+         	</form>
+         	</div>
+         
+         </div>
+      </section>
+	<th:block th:insert="~{inc/footer.html}"></th:block>
+
+	<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+	<script>
+	
+	</script>
+	
+	
+</body>
+</html>
