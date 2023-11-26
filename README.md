@@ -1,4 +1,4 @@
-펫 케어 서비스 웹 사이트 프로젝트 PeTwoGether(Spring 구현 부분) Java11, STS3, Oracle, Thymeleaf
+펫 케어 서비스 웹 사이트 프로젝트 PeTwoGether(Spring 구현 부분) Java11, STS4, Oracle, Thymeleaf
 
 관리자, 펫 시터, 일반회원으로 역할을 분리하여 각 기능을 구현
 
